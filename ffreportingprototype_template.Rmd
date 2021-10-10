@@ -1,0 +1,20 @@
+---
+title: "febfast Report"
+output: pdf_document
+---
+
+Your participant ID is `r extract$ParticipantID`. At the time of testing, you were `r extract$Age` years old.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque faucibus, lacus eget efficitur malesuada, nunc quam efficitur turpis, sed gravida ipsum eros nec metus. Phasellus et odio feugiat, fringilla sapien sed, tincidunt mauris. Praesent suscipit mi magna, eget fermentum metus commodo non. Integer vestibulum fringilla neque a lacinia. Sed non quam libero. Proin tellus ipsum, mattis eget erat quis, mollis efficitur erat. In tempor velit et est volutpat, a hendrerit mi bibendum. Fusce ornare, urna efficitur aliquet elementum, massa nibh pretium nisl, in aliquet massa risus ut leo. Suspendisse tempor ex ut quam pretium, non malesuada turpis consectetur. Praesent vehicula ut leo sed vestibulum. Cras tincidunt non ex euismod dignissim. Aenean porta tortor vel varius efficitur. Phasellus sed quam eu elit facilisis mollis. Morbi hendrerit euismod nunc, quis ornare nibh pellentesque vitae. Nullam sed lorem id odio condimentum luctus vitae vel velit. Donec ac lacus pharetra, mollis ligula non, cursus elit.
+
+```{r chunk1, echo = FALSE, warning = FALSE, fig.align = "center"}
+graph1
+```
+
+Morbi vitae malesuada ipsum. Proin a vestibulum turpis. Etiam a diam diam. Mauris in sodales tellus, et hendrerit enim. Vivamus eu nulla magna. Mauris accumsan vestibulum mattis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Donec id orci orci. Donec rhoncus a est non scelerisque.
+
+```{r chunk2, echo = FALSE, warning = FALSE, fig.align = "center"}
+grid.arrange(graph2, graph1, ncol = 2)
+```
+
+Praesent nec massa nec odio ultricies maximus. Pellentesque vel libero volutpat, iaculis enim a, suscipit risus. Praesent ac justo quis velit sodales luctus. Donec vitae erat ultricies, finibus ligula ut, lacinia arcu. Suspendisse at nunc quis augue ultricies tincidunt id feugiat ante. Praesent ut massa at tortor tempus aliquam.
