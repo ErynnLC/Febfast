@@ -1,0 +1,52 @@
+---
+title: \fontsize{45}{54} \color{SeaGreen}__My Profile__
+geometry: margin = 1cm
+output:
+    pdf_document:
+        latex_engine: xelatex
+        keep_tex : true
+classoption: dvipsnames
+header-includes:
+  - \usepackage{fontspec}
+  - \setmainfont{Arial}
+  - \usepackage{titling}
+  - \pretitle{\begin{flushleft}}
+  - \posttitle{\end{flushleft}}
+  - \pagenumbering{gobble}
+---
+```{r chunk1, echo = FALSE, warning = FALSE, fig.align = "center", fig.width = 11, fig.height = 9}
+par(mar = c(1, 1, 0.1, 0.1))
+
+# Advanced profile check
+if (extract$Advanced == 0) {
+
+# Regular profile
+radarchart(dradar,
+           pcol = participant_colour,
+           pfcol = participant_colourinner,
+           plwd = 5,
+           cglty = 1,
+           cglcol = radargrid_colour,
+           cglwd = 2,
+           plty = 1,
+           vlcex = 1.6,
+           vlabels = radarlabels)
+} else {
+
+# Advanced profile  
+radarchart(dradar,
+           pcol = c(sample_colour, participant_colour),
+           pfcol = c(sample_colourinner, participant_colourinner),
+           plwd = 5,
+           cglty = c(1,1),
+           cglcol = radargrid_colour,
+           cglwd = 2,
+           plty = c(1,1),
+           vlcex = 1.6,
+           vlabels = radarlabels)
+
+legend(x = "topright", legend = c(advlegend_participant, advlegendname), bty = "n", pch = 20, col = c(participant_colour, sample_colour), cex = 1.2, pt.cex = 4)
+
+}
+```
+![Logos](logo.png){width=70%}\
