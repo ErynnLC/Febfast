@@ -21,7 +21,7 @@ advlegend_sample <- "Fellow febfast Participants"
 radarlabels <- c("Persistence",
                  "Tolerance of        \nUncertainty        ",
                  "Risk Taking       ",
-                 "Thoughtfulness",
+                 "Planning",
                  "Reward Driven",
                  "            Emotion Driven\n            Positive",
                  "     Emotion Driven\n     Negative")
@@ -47,9 +47,13 @@ davg <- c(mean(d$SUPPS_Persev), mean(d$TolUncert_Score),
           mean(d$SUPPS_NU))
 
 # Column names for radar
-dlist <- c("SUPPS_Persev", "TolUncert_Score",
-           "RiskQuestion", "SUPPS_Premed",
-           "BAS_D_Score", "SUPPS_PU", "SUPPS_NU")
+dlist <- c("SUPPS_Persev",
+           "TolUncert_Score",
+           "RiskQuestion",
+           "SUPPS_Premed",
+           "BAS_D_Score",
+           "SUPPS_PU",
+           "SUPPS_NU")
 
 # Main for loop to generate reports
 for (participant in unique(d$ParticipantID)) {
@@ -65,7 +69,8 @@ for (participant in unique(d$ParticipantID)) {
   dradar[2,3] <- 0
   colnames(dradar) <- c("Persistence",
                         "Tolerance of Uncertainty",
-                        "Risk Taking", "Thoughtfulness",
+                        "Risk Taking",
+                        "Planning",
                         "Reward Driven",
                         "Emotion Driven Positive",
                         "Emotion Driven Negative")

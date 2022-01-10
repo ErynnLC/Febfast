@@ -49,4 +49,6 @@ legend(x = "topright", legend = c(advlegend_participant, advlegendname), bty = "
 
 }
 ```
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec pretium mi. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
 ![Logos](logo.png){width=70%}\
