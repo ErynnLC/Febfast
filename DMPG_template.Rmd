@@ -1,5 +1,5 @@
 ---
-title: \fontsize{45}{54} \color{SeaGreen}__My Profile__
+title: \fontsize{45}{54} \vspace{-2em} \color{Black}__My Profile__
 geometry: margin = 1cm
 output:
     pdf_document:
@@ -14,6 +14,12 @@ header-includes:
   - \posttitle{\end{flushleft}}
   - \pagenumbering{gobble}
 ---
+<!-- Decision-Making Profile Generation
+19.01.2022 -->
+\vspace{-3em}
+
+![Bar](bar.png){height=20%)}\
+
 ```{r chunk1, echo = FALSE, warning = FALSE, fig.align = "center", fig.width = 11, fig.height = 9}
 par(mar = c(1, 1, 0.1, 0.1))
 
@@ -22,6 +28,11 @@ if (extract$Advanced == 0) {
 
 # Regular profile
 radarchart(dradar,
+           axistype = 1,
+           caxislabels = radarcenterlabels,
+           axislabcol = "black",
+           calcex = 1.5,
+           centerzero = TRUE,
            pcol = participant_colour,
            pfcol = participant_colourinner,
            plwd = 5,
@@ -35,6 +46,11 @@ radarchart(dradar,
 
 # Advanced profile  
 radarchart(dradar,
+           axistype = 1,
+           caxislabels = radarcenterlabels,
+           axislabcol = "black",
+           calcex = 1.5,
+           centerzero = TRUE,
            pcol = c(sample_colour, participant_colour),
            pfcol = c(sample_colourinner, participant_colourinner),
            plwd = 5,
@@ -45,10 +61,12 @@ radarchart(dradar,
            vlcex = 1.6,
            vlabels = radarlabels)
 
-legend(x = "topright", legend = c(advlegend_participant, advlegendname), bty = "n", pch = 20, col = c(participant_colour, sample_colour), cex = 1.2, pt.cex = 4)
+legend(x = "topright", legend = c(advlegend_participant, advlegend_sample), bty = "n", pch = 20, col = c(participant_colour, sample_colour), cex = 1.2, pt.cex = 4)
 
 }
 ```
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec pretium mi. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+This graph shows how you have scored in comparison to the average Australian with your age `r if (extract$Age >= 18 & extract$Age <= 34) {"(18-34)"} else if (extract$Age >= 35 & extract$Age <= 64) {"(35-64)"}``r if (extract$Gender == "Man" | extract$Gender == "Woman") {" and gender"} else {}`. For example, if your risk-taking score is 75 that means your risk-taking propensity is higher than 75% of Australians your age`r if (extract$Gender == "Man" | extract$Gender == "Woman") {" and gender"} else {}`.
 
-![Logos](logo.png){width=70%}\
+![Logos](logo.png)\
+
+![Bar](bar.png)\
