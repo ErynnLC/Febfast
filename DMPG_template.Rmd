@@ -15,7 +15,7 @@ header-includes:
   - \pagenumbering{gobble}
 ---
 <!-- Decision-Making Profile Generation
-19.01.2022 -->
+21.01.2022 -->
 \vspace{-3em}
 
 ![Bar](bar.png){height=20%)}\

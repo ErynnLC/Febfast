@@ -1,5 +1,5 @@
 # Decision-Making Profile Generation
-# 19.01.2022
+# 21.01.2022
 
 # Load packages
 library(readxl)
@@ -23,7 +23,7 @@ radarlabels <- c("Persistence",
                  "Tolerance of        \nUncertainty        ",
                  "Risk-Taking       ",
                  "Planning",
-                 "       Reward Driven",
+                 "       Reward Drive",
                  "            Emotion Driven\n            Impulsivity")
 
 # Radar colours
@@ -125,7 +125,7 @@ for (participant in unique(d$ParticipantID)) {
                         "Tolerance of Uncertainty",
                         "Risk-Taking",
                         "Planning",
-                        "Reward Driven",
+                        "Reward Drive",
                         "Emotion Driven Impulsivity")
   
   # Advanced profile check
