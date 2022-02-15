@@ -1,0 +1,55 @@
+---
+title: \fontsize{45}{54} \vspace{-2em} \color{Black}__MY PROFILE__
+geometry: margin = 1cm
+output:
+    pdf_document:
+        latex_engine: xelatex
+        keep_tex : true
+classoption: dvipsnames
+header-includes:
+  - \usepackage{fontspec}
+  - \usepackage{changepage}
+  - \setmainfont{Arial}
+  - \usepackage{titling}
+  - \pretitle{\begin{flushleft}}
+  - \posttitle{\end{flushleft}}
+  - \pagenumbering{gobble}
+---
+<!-- Decision-Making Profile
+15.02.2022 -->
+\vspace{-3.3em}
+
+![Bar](bar.png){height=20%)}\
+
+```{r chunk1, echo = FALSE, warning = FALSE, fig.align = "center", fig.width = 11, fig.height = 8}
+par(mar = c(1, 1, 0.1, 0.1))
+# Set parameters
+op <- par(font = 2)
+
+# Regular profile
+radarchart(dradar,
+           axistype = 1,
+           caxislabels = radarcenterlabels,
+           axislabcol = "black",
+           calcex = 1.4,
+           centerzero = TRUE,
+           pcol = participant_colour,
+           pfcol = participant_colourinner,
+           plwd = 5,
+           cglty = 1,
+           cglcol = radargrid_colour,
+           cglwd = 2,
+           plty = 1,
+           vlcex = 1.5,
+           vlabels = radarlabels)
+
+# Reset parameters
+par(op)
+```
+\begin{adjustwidth}{50pt}{50pt}
+This graph shows how you have scored in comparison to Australians in your age bracket`r if (extract$Age <= 45 & extract$Gender != 2) {" and of your gender"} else {}`, taken from a BrainPark normative study. For example, if your risk-taking score is 75 that means your risk-taking propensity is higher than 75 per cent of Australians your age bracket`r if (extract$Age <= 45 & extract$Gender != 2) {" and gender"} else {}`. These scores are based on your responses on the day and may change over time or in differing circumstances.
+\end{adjustwidth}
+
+![Logos](logo.png)\
+
+![Bar](bar.png)\

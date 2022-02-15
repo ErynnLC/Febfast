@@ -1,0 +1,57 @@
+---
+title: \fontsize{45}{54} \vspace{-2em} \color{Black}__MY ADVANCED PROFILE__
+geometry: margin = 1cm
+output:
+    pdf_document:
+        latex_engine: xelatex
+        keep_tex : true
+classoption: dvipsnames
+header-includes:
+  - \usepackage{fontspec}
+  - \usepackage{changepage}
+  - \setmainfont{Arial}
+  - \usepackage{titling}
+  - \pretitle{\begin{flushleft}}
+  - \posttitle{\end{flushleft}}
+  - \pagenumbering{gobble}
+---
+<!-- Decision-Making Profile
+15.02.2022 -->
+\vspace{-3.3em}
+
+![Bar](bar.png){height=20%)}\
+
+```{r chunk1, echo = FALSE, warning = FALSE, fig.align = "center", fig.width = 11, fig.height = 8}
+par(mar = c(1, 1, 0.1, 0.1))
+# Set parameters
+op <- par(font = 2)
+
+# Advanced profile
+radarchart(dradar_adv,
+           axistype = 1,
+           caxislabels = radarcenterlabels,
+           axislabcol = "black",
+           calcex = 1.4,
+           centerzero = TRUE,
+           pcol = c(sample_colour, participant_colour),
+           pfcol = c(sample_colourinner, participant_colourinner),
+           plwd = 5,
+           cglty = c(1,1),
+           cglcol = radargrid_colour,
+           cglwd = 2,
+           plty = c(1,1),
+           vlcex = 1.5,
+           vlabels = radarlabels)
+
+legend(x = "topright", legend = c(advlegend_participant, advlegend_sample), bty = "n", pch = 20, col = c(participant_colour, sample_colour), cex = 1.2, pt.cex = 4)
+
+# Reset parameters
+par(op)
+```
+\begin{adjustwidth}{50pt}{50pt}
+This graph shows how you have scored in comparison to the average febfaster who took part in the study (shown in yellow). Your score and the average febfaster's score is shown in relation to a normative Australian sample, taken from a BrainPark research study. For example, if your risk-taking score is 75 and the febfaster average score is 60 that means your risk-taking propensity is higher than 75 per cent of Australians but only 60 per cent higher than the average febfaster. These scores are based on your responses on the day and may change over time or in differing circumstances.
+\end{adjustwidth}
+
+![Logos](logo.png)\
+
+![Bar](bar.png)\

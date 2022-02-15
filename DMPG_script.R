@@ -1,5 +1,5 @@
-# Decision-Making Profile Generation
-# 21.01.2022
+# Decision-Making Profile
+# 15.02.2022
 
 # Load packages
 library(readxl)
@@ -7,9 +7,14 @@ library(rmarkdown)
 library(fmsb)
 library(pdftools)
 
-# Import study data and norming data
-d <- read_excel("./DMPG_data.xlsx")
-dn <- read_excel("./DMPG_norm.xlsx")
+# Import study and norming data
+d <- read.csv("./DMPG_data.csv")
+dnp <- read.csv("./DMPG_norm.csv")
+
+# Remove NA listwise and subset by Gender (1 = "Woman", 0 = "Man", 2 = any other choice)
+dinspect <- dnp[!complete.cases(dnp),]
+dnp <- dnp[complete.cases(dnp),]
+dn <- dnp[dnp$Gender == 1 | dnp$Gender == 0,] 
 
 # File prefix variable
 prefix <- "P_"
@@ -24,7 +29,7 @@ radarlabels <- c("Persistence",
                  "Risk-Taking       ",
                  "Planning",
                  "       Reward Drive",
-                 "            Emotion Driven\n            Impulsivity")
+                 "            Emotion-Driven\n            Impulsivity")
 
 # Radar colours
 radargrid_colour <- rgb(0.41, 0.41, 0.41, 0.7)
@@ -34,7 +39,7 @@ sample_colour <- rgb(0.98, 0.68, 0.26, 0.8)
 sample_colourinner <- rgb(0.98, 0.68, 0.26, 0.4)
 
 # Center labels
-radarcenterlabels <- c("0", "", "50\n", "", "100\n")
+radarcenterlabels <- c("0%   ", "", "50%   \n", "", "100%   \n")
 
 # Class conversions
 d$SUPPS_Persev <- as.double(d$SUPPS_Persev)
@@ -86,29 +91,38 @@ for (participant in unique(d$ParticipantID)) {
   extract <- d[d$ParticipantID == participant,]
   
   # Subset norming data based on participant demo
-  if (extract$Gender == "Man") {
-    dn_sub <- dn[dn$Gender == "Man",]
-    if (extract$Age >= 18 & extract$Age <= 34) {
-      dn_sub <- dn_sub[dn_sub$Age >= 18 & dn_sub$Age <= 34,]
-    } else if (extract$Age >= 35 & extract$Age <= 64) {
-      dn_sub <- dn_sub[dn_sub$Age >= 35 & dn_sub$Age <= 64,]
+  # 1 = Woman, 0 = Man
+  if (extract$Gender == 0 & extract$Age <= 45) {
+    dn_sub <- dn[dn$Gender == 0,]
+    if (extract$Age >= 18 & extract$Age <= 24) {
+      dn_sub <- dn_sub[dn_sub$Age >= 18 & dn_sub$Age <= 24,]
+    } else if (extract$Age >= 25 & extract$Age <= 34) {
+      dn_sub <- dn_sub[dn_sub$Age >= 25 & dn_sub$Age <= 34,]
+    } else if (extract$Age >= 35 & extract$Age <= 45) {
+      dn_sub <- dn_sub[dn_sub$Age >= 35 & dn_sub$Age <= 45,]
     }
-  } else if (extract$Gender == "Woman") {
-    dn_sub <- dn[dn$Gender == "Woman",]
-    if (extract$Age >= 18 & extract$Age <= 34) {
-      dn_sub <- dn_sub[dn_sub$Age >= 18 & dn_sub$Age <= 34,]
-    } else if (extract$Age >= 35 & extract$Age <= 64) {
-      dn_sub <- dn_sub[dn_sub$Age >= 35 & dn_sub$Age <= 64,]
+  } else if (extract$Gender == 1 & extract$Age <= 45) {
+    dn_sub <- dn[dn$Gender == 1,]
+    if (extract$Age >= 18 & extract$Age <= 24) {
+      dn_sub <- dn_sub[dn_sub$Age >= 18 & dn_sub$Age <= 24,]
+    } else if (extract$Age >= 25 & extract$Age <= 34) {
+      dn_sub <- dn_sub[dn_sub$Age >= 25 & dn_sub$Age <= 34,]
+    } else if (extract$Age >= 35 & extract$Age <= 45) {
+      dn_sub <- dn_sub[dn_sub$Age >= 35 & dn_sub$Age <= 45,]
     }
+  } else if (extract$Age >= 46) {
+      dn_sub <- dn[dn$Age >= 46,]
   } else {
-    if (extract$Age >= 18 & extract$Age <= 34) {
-      dn_sub <- dn[dn$Age >= 18 & dn$Age <= 34,]
-    } else if (extract$Age >= 35 & extract$Age <= 64) {
-      dn_sub <- dn[dn$Age >= 35 & dn$Age <= 64,]
+    if (extract$Age >= 18 & extract$Age <= 24) {
+      dn_sub <- dn[dn$Age >= 18 & dn$Age <= 24,]
+    } else if (extract$Age >= 25 & extract$Age <= 34) {
+      dn_sub <- dn[dn$Age >= 25 & dn$Age <= 34,]
+    } else if (extract$Age >= 35 & extract$Age <= 45) {
+      dn_sub <- dn[dn$Age >= 35 & extract$Age <= 45,]
     }
   }
   
-  # Computer percentages based on subset norming data
+  # Compute percentages based on subset norming data
   p_SUPPS_Persev <- ((sum(extract$SUPPS_Persev > dn_sub$SUPPS_Persev))/nrow(dn_sub)) * 100
   p_TolUncert_Score <- ((sum(extract$TolUncert_Score >= dn_sub$TolUncert_Score))/nrow(dn_sub)) * 100
   p_RiskQuestion <- ((sum(extract$RiskQuestion > dn_sub$RiskQuestion))/nrow(dn_sub)) * 100
@@ -126,24 +140,58 @@ for (participant in unique(d$ParticipantID)) {
                         "Risk-Taking",
                         "Planning",
                         "Reward Drive",
-                        "Emotion Driven Impulsivity")
+                        "Emotion-Driven Impulsivity")
   
   # Advanced profile check
-  if (extract$Advanced == 1) {
+  if (extract$AdvancedProfile == 1) {
+    
+    # Compute percentages based on whole sample
+    pn_SUPPS_Persev <- ((sum(extract$SUPPS_Persev > dn$SUPPS_Persev))/nrow(dn)) * 100
+    pn_TolUncert_Score <- ((sum(extract$TolUncert_Score > dn$TolUncert_Score))/nrow(dn)) * 100
+    pn_RiskQuestion <- ((sum(extract$RiskQuestion > dn$RiskQuestion))/nrow(dn)) * 100
+    pn_SUPPS_Premed <- ((sum(extract$SUPPS_Premed > dn$SUPPS_Premed))/nrow(dn)) * 100
+    pn_BAS_D_Score <- ((sum(extract$BAS_D_Score > dn$BAS_D_Score))/nrow(dn)) * 100
+    pn_SUPPS_EDI <- ((sum(extract$SUPPS_EDI > dn$SUPPS_EDI))/nrow(dn)) * 100
+    
+    dadv_pn <- c(pn_SUPPS_Persev, pn_TolUncert_Score,
+              pn_RiskQuestion, pn_SUPPS_Premed,
+              pn_BAS_D_Score, pn_SUPPS_EDI)
     
     # Prepare for fmsb function (advanced)
-    dradar <- rbind(dradar[1:2,], davg, dradar[3,])
+    dradar_adv <- rbind(dradar[1:2,], davg, dadv_pn)
+    
+    colnames(dradar_adv) <- c("Persistence",
+                          "Tolerance of Uncertainty",
+                          "Risk-Taking",
+                          "Planning",
+                          "Reward Drive",
+                          "Emotion-Driven Impulsivity")
   }
   
   # Build report from rmd template
-  render("./reports/DMPG_template.Rmd",
-         output_file = 
+  render("./reports/DMPG_template1.Rmd",
+         output_file =
            paste0(prefix, participant, ".pdf"))
   
-  # Merge with second page (new folder)
-  pdf_combine(c(paste0("./reports/", prefix, participant,
-                       ".pdf"), "./reports/infopage.pdf"),
+  if (extract$AdvancedProfile == 1) {
+    render("./reports/DMPG_template2.Rmd",
+           output_file = 
+             paste0(prefix, participant, "_2.pdf"))
+  }
+  
+  # Merge with info page (new folder)
+  if (extract$AdvancedProfile == 0) {
+  pdf_combine(c(paste0("./reports/", prefix, participant, ".pdf"),
+                "./reports/infopage.pdf"),
               output = 
                 paste0("./combinedreports/", prefix,
                        participant, ".pdf"))
+  } else {
+    pdf_combine(c(paste0("./reports/", prefix, participant, ".pdf"),
+                  paste0("./reports/", prefix, participant, "_2.pdf"),
+                  "./reports/infopage.pdf"),
+                output = 
+                  paste0("./combinedreports/", prefix,
+                         participant, ".pdf"))
+  }
 }
