@@ -11,12 +11,12 @@ header-includes:
   - \usepackage{changepage}
   - \setmainfont{Arial}
   - \usepackage{titling}
-  - \pretitle{\begin{flushleft}}
-  - \posttitle{\end{flushleft}}
+  # - \pretitle{\begin{flushleft}}
+  # - \posttitle{\end{flushleft}}
   - \pagenumbering{gobble}
 ---
 <!-- Decision-Making Profile
-15.02.2022 -->
+22.02.2022 -->
 \vspace{-3.3em}
 
 ![Bar](bar.png){height=20%)}\

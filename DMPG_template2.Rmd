@@ -11,12 +11,12 @@ header-includes:
   - \usepackage{changepage}
   - \setmainfont{Arial}
   - \usepackage{titling}
-  - \pretitle{\begin{flushleft}}
-  - \posttitle{\end{flushleft}}
+  # - \pretitle{\begin{flushleft}}
+  # - \posttitle{\end{flushleft}}
   - \pagenumbering{gobble}
 ---
 <!-- Decision-Making Profile
-15.02.2022 -->
+22.02.2022 -->
 \vspace{-3.3em}
 
 ![Bar](bar.png){height=20%)}\
@@ -49,7 +49,7 @@ legend(x = "topright", legend = c(advlegend_participant, advlegend_sample), bty 
 par(op)
 ```
 \begin{adjustwidth}{50pt}{50pt}
-This graph shows how you have scored in comparison to the average febfaster who took part in the study (shown in yellow). Your score and the average febfaster's score is shown in relation to a normative Australian sample, taken from a BrainPark research study. For example, if your risk-taking score is 75 and the febfaster average score is 60 that means your risk-taking propensity is higher than 75 per cent of Australians but only 60 per cent higher than the average febfaster. These scores are based on your responses on the day and may change over time or in differing circumstances.
+This graph shows how you have scored in comparison to the average febfaster who took part in the study (shown in yellow). Your score and the average febfaster's score is shown in relation to a normative Australian sample, taken from a BrainPark research study. For example, if your risk-taking score is 75 and the febfaster average score is 60 that means your risk-taking propensity is higher than 75 per cent of Australians but only 15 per cent higher than the average febfaster. These scores are based on your responses on the day and may change over time or in differing circumstances.
 \end{adjustwidth}
 
 ![Logos](logo.png)\
